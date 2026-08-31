@@ -14,6 +14,16 @@ spec:
       labels:
         app: myapplication
     spec:
+      # OCIR repositories are private by default — the cluster's own nodes
+      # need real, authenticated pull access, the same secret name/shape
+      # the Infrastructure Provisioning Portal already creates in this
+      # app's namespace before every build (kubernetes_client.
+      # ensure_pull_secret, "ocir-pull-secret"). Without this, the image
+      # builds and pushes successfully but the pod can never actually pull
+      # it back out ("Anonymous users are only allowed read access on
+      # public repos" — the real failure this fixes).
+      imagePullSecrets:
+        - name: ocir-pull-secret
       containers:
         - name: myapplication
           # Replaced with the real OCIR image the Build and Deploy pipeline
