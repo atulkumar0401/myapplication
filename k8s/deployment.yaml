@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapplication
+  labels:
+    app: myapplication
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: myapplication
+  template:
+    metadata:
+      labels:
+        app: myapplication
+    spec:
+      containers:
+        - name: myapplication
+          # Replaced with the real OCIR image the Build and Deploy pipeline
+          # pushes (see the portal's own image-mirroring discipline) — this
+          # placeholder is what the repo ships with before that pipeline
+          # exists.
+          image: myapplication:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 128Mi

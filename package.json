@@ -1,0 +1,16 @@
+{
+  "name": "myapplication",
+  "version": "1.0.0",
+  "description": "Sample frontend app used to prove the Build and Deploy pipeline (source -> container image -> ArgoCD -> OKE).",
+  "private": true,
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

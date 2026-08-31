@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapplication
+  labels:
+    app: myapplication
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: myapplication.dev-oke2.noqodi.internal
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapplication
+                port:
+                  number: 80
