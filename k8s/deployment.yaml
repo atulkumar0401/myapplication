@@ -31,7 +31,7 @@ spec:
           # pushes (see the portal's own image-mirroring discipline) — this
           # placeholder is what the repo ships with before that pipeline
           # exists.
-          image: me-dubai-1.ocir.io/axuri6bvn1y8/infra-portal/myapplication:req-2026-0133-06e8936ad90a
+          image: me-dubai-1.ocir.io/axuri6bvn1y8/infra-portal/myapplication:req-2026-0133-8120571f70b9
           ports:
             - containerPort: 8080
           env:
